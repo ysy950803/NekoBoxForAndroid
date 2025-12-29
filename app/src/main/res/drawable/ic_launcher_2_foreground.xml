@@ -1,0 +1,88 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <group
+        android:pivotX="54"
+        android:pivotY="54"
+        android:scaleX="0.75"
+        android:scaleY="0.75">
+
+        <!-- Ears (Blue Grey) -->
+        <path
+            android:fillColor="#78909C"
+            android:pathData="M30,35 L20,10 L50,25 Z" />
+        <path
+            android:fillColor="#78909C"
+            android:pathData="M78,35 L88,10 L58,25 Z" />
+
+        <!-- Face (White) -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M54,54 m-35,0 a35,35 0 1,0 70,0 a35,35 0 1,0 -70,0" />
+
+        <!-- Mask Left (Blue Grey) -->
+        <path
+            android:fillColor="#78909C"
+            android:pathData="M54,25 L48,55 Q30,65 19,45 L30,35 Z" />
+
+        <!-- Mask Right (Blue Grey) -->
+        <path
+            android:fillColor="#78909C"
+            android:pathData="M54,25 L60,55 Q78,65 89,45 L78,35 Z" />
+
+        <!-- Inner Ears (Pink) -->
+        <path
+            android:fillColor="#F48FB1"
+            android:pathData="M32,32 L26,18 L42,28 Z" />
+        <path
+            android:fillColor="#F48FB1"
+            android:pathData="M76,32 L82,18 L66,28 Z" />
+
+        <!-- Eyes (Blue) -->
+        <path
+            android:fillColor="#29B6F6"
+            android:pathData="M42,50 m-4,0 a4,4 0 1,0 8,0 a4,4 0 1,0 -8,0" />
+        <path
+            android:fillColor="#29B6F6"
+            android:pathData="M66,50 m-4,0 a4,4 0 1,0 8,0 a4,4 0 1,0 -8,0" />
+
+        <!-- Eye Highlights (White) -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M43,49 m-1.5,0 a1.5,1.5 0 1,0 3,0 a1.5,1.5 0 1,0 -3,0" />
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M67,49 m-1.5,0 a1.5,1.5 0 1,0 3,0 a1.5,1.5 0 1,0 -3,0" />
+
+        <!-- Nose (Pink) -->
+        <path
+            android:fillColor="#F06292"
+            android:pathData="M54,62 l-4,-4 l8,0 z" />
+
+        <!-- Mouth (Blue Grey) -->
+        <path
+            android:strokeColor="#455A64"
+            android:strokeWidth="2"
+            android:strokeLineCap="round"
+            android:pathData="M54,62 q-6,6 -12,2 M54,62 q6,6 12,2" />
+
+        <!-- Whiskers Left (Blue Grey) -->
+        <path
+            android:strokeColor="#455A64"
+            android:strokeWidth="1"
+            android:strokeLineCap="round"
+            android:pathData="M25,58 l-10,-2 M25,62 l-10,2" />
+
+        <!-- Whiskers Right (Blue Grey) -->
+        <path
+            android:strokeColor="#455A64"
+            android:strokeWidth="1"
+            android:strokeLineCap="round"
+            android:pathData="M83,58 l10,-2 M83,62 l10,2" />
+
+    </group>
+</vector>
+
