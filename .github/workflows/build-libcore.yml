@@ -1,0 +1,82 @@
+name: Build LibCore
+
+on:
+  workflow_dispatch:
+    inputs:
+      use_cache:
+        description: 'Use cache if available'
+        required: false
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+
+jobs:
+  build-libcore:
+    name: Build and Upload LibCore
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Golang Status
+        run: find buildScript libcore/*.sh | xargs cat | sha1sum > golang_status
+
+      - name: Libcore Status
+        run: git ls-files libcore | xargs cat | sha1sum > libcore_status
+
+      - name: LibCore Cache
+        if: github.event.inputs.use_cache == 'true'
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            app/libs/libcore.aar
+          key: ${{ hashFiles('.github/workflows/*', 'golang_status', 'libcore_status') }}
+
+      - name: Install Golang
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/setup-go@v5
+        with:
+          go-version: ^1.25
+
+      - name: Build LibCore
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: ./run lib core
+
+      - name: Verify LibCore Build
+        run: |
+          if [ -f "app/libs/libcore.aar" ]; then
+            echo "LibCore built successfully"
+            ls -lh app/libs/libcore.aar
+          else
+            echo "Error: libcore.aar not found"
+            exit 1
+          fi
+
+      - name: Upload LibCore AAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: libcore-aar
+          path: app/libs/libcore.aar
+          retention-days: 30
+          if-no-files-found: error
+
+      - name: Create Build Info
+        run: |
+          echo "Build Date: $(date)" > build-info.txt
+          echo "Commit: ${{ github.sha }}" >> build-info.txt
+          echo "Branch: ${{ github.ref_name }}" >> build-info.txt
+          echo "Golang Status Hash: $(cat golang_status)" >> build-info.txt
+          echo "Libcore Status Hash: $(cat libcore_status)" >> build-info.txt
+          cat build-info.txt
+
+      - name: Upload Build Info
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-info
+          path: build-info.txt
+          retention-days: 30
